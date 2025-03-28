@@ -5,6 +5,7 @@
 /datagate-macos
 /datagate-linux
 /datagate-windows
+build/
 
 # Go build cache & module files
 /bin/
