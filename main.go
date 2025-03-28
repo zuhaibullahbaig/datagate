@@ -39,7 +39,7 @@ func main() {
 		homepageURL = fmt.Sprintf("http://%s:%d/?token=%s", utils.GetLocalIP(), config.Port, token)
 	} else {
 		server.SetupRoutes(app, config.Dir, "", false)
-		homepageURL = fmt.Sprintf("http://%s:%d/?token=%s", utils.GetLocalIP(), config.Port, token)
+		homepageURL = fmt.Sprintf("http://%s:%d/", utils.GetLocalIP(), config.Port)
 
 	}
 
