@@ -1,0 +1,26 @@
+# Compiled binaries
+/datagate
+/datagate.exe
+/datagate-darwin
+/datagate-linux
+/datagate-windows
+
+# Go build cache & module files
+/bin/
+/pkg/
+*.exe
+*.out
+*.test
+
+# Go dependency directory
+vendor/
+
+# IDE/editor settings
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs & temp files
+*.log
+*.tmp

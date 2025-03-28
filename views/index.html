@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>DataGate File Server</title>
+        <link rel="stylesheet" href="/static/css/styles.css" />
+    </head>
+    <body>
+        <div class="file-server-container">
+            <header class="server-header">
+                <div class="header-content">
+                    <h1>DataGate</h1>
+                    <div class="breadcrumb">
+                        <a href="/" id="home-link">Home</a>
+                    </div>
+                </div>
+            </header>
+
+            <main class="file-list-container">
+                <div class="file-list">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Type</th>
+                                <th>Size</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{range .Files}}
+                            <tr>
+                                <td class="file-name">
+                                    <div class="file-icon">
+                                        {{if .IsDir}}
+                                        <span class="icon folder-icon">
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                viewBox="0 0 24 24"
+                                                fill="currentColor"
+                                            >
+                                                <path
+                                                    d="M20 6h-8l-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2z"
+                                                />
+                                            </svg>
+                                        </span>
+                                        {{else}} {{if eq .Extension ".pdf"}}
+                                        <span class="icon pdf-icon">
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                viewBox="0 0 24 24"
+                                                fill="currentColor"
+                                            >
+                                                <path
+                                                    d="M20 2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"
+                                                />
+                                            </svg>
+                                        </span>
+                                        {{else if or (eq .Extension ".jpg") (eq
+                                        .Extension ".png") (eq .Extension
+                                        ".gif")}}
+                                        <span class="icon image-icon">
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                viewBox="0 0 24 24"
+                                                fill="currentColor"
+                                            >
+                                                <path
+                                                    d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"
+                                                />
+                                            </svg>
+                                        </span>
+                                        {{else if or (eq .Extension ".mp3") (eq
+                                        .Extension ".wav") (eq .Extension
+                                        ".flac")}}
+                                        <span class="icon audio-icon">
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                viewBox="0 0 24 24"
+                                                fill="currentColor"
+                                            >
+                                                <path
+                                                    d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"
+                                                />
+                                            </svg>
+                                        </span>
+                                        {{else}}
+                                        <span class="icon default-icon">
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                viewBox="0 0 24 24"
+                                                fill="currentColor"
+                                            >
+                                                <path
+                                                    d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6z"
+                                                />
+                                            </svg>
+                                        </span>
+                                        {{end}} {{end}}
+                                    </div>
+                                    <a href="{{.Path}}" class="file-link"
+                                        >{{.Name}}</a
+                                    >
+                                </td>
+                                <td>{{if .IsDir}}Folder{{else}}File{{end}}</td>
+                                <td>{{.FormattedSize}}</td>
+                                <td>
+                                    {{if .IsDir}}
+                                    <a
+                                        href="{{.Path}}"
+                                        class="action-btn view-btn"
+                                        >Open</a
+                                    >
+                                    {{else}}
+                                    <a
+                                        href="{{.Path}}"
+                                        class="action-btn download-btn"
+                                        download
+                                        >Download</a
+                                    >
+                                    {{end}}
+                                </td>
+                            </tr>
+                            {{end}}
+                        </tbody>
+                    </table>
+
+                    {{if eq (len .Files) 0}}
+                    <div class="empty-state">
+                        <p>This directory is empty</p>
+                    </div>
+                    {{end}}
+                </div>
+            </main>
+
+            <footer class="server-footer">
+                <div class="server-info">
+                    <span>Total Files: {{len .Files}}</span>
+                    <span>Total Size: {{.TotalDirectorySize}}</span>
+                </div>
+            </footer>
+        </div>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const params = new URLSearchParams(window.location.search);
+                const token = params.get("token");
+
+                if (token) {
+                    document.getElementById("home-link").href =
+                        "/?token=" + encodeURIComponent(token);
+                }
+            });
+        </script>
+    </body>
+</html>

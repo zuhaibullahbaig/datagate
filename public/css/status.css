@@ -1,0 +1,148 @@
+:root {
+    --color-primary: #2ecc71;
+    --color-secondary: #27ae60;
+    --color-background: #f4f6f7;
+    --color-text-dark: #2c3e50;
+    --color-text-light: #7f8c8d;
+    --border-radius: 12px;
+    --box-shadow:
+        0 15px 35px rgba(50, 50, 93, 0.1), 0 5px 15px rgba(0, 0, 0, 0.07);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family:
+        "Inter",
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        Oxygen,
+        Ubuntu,
+        Cantarell,
+        "Open Sans",
+        "Helvetica Neue",
+        sans-serif;
+    background-color: var(--color-background);
+    color: var(--color-text-dark);
+    line-height: 1.6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.status-wrapper {
+    background-color: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    width: 100%;
+    max-width: 500px;
+    overflow: hidden;
+}
+
+.status-header {
+    background-color: var(--color-primary);
+    color: white;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo-icon {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+}
+
+.logo-text {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.status-content {
+    padding: 40px 30px;
+    text-align: center;
+}
+
+.status-indicator {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.status-icon {
+    width: 80px;
+    height: 80px;
+    color: var(--color-primary);
+    margin-bottom: 20px;
+}
+
+.status-icon svg {
+    width: 100%;
+    height: 100%;
+}
+
+.status-title {
+    font-size: 2rem;
+    color: var(--color-secondary);
+    margin-bottom: 15px;
+}
+
+.status-description {
+    color: var(--color-text-light);
+    max-width: 350px;
+    line-height: 1.5;
+}
+
+.status-footer {
+    background-color: var(--color-background);
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.system-details {
+    display: flex;
+    gap: 40px;
+}
+
+.detail {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.detail-label {
+    color: var(--color-text-light);
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+}
+
+.detail-value {
+    font-weight: 600;
+    color: var(--color-text-dark);
+}
+
+@media (max-width: 600px) {
+    .status-wrapper {
+        margin: 20px;
+        width: calc(100% - 40px);
+    }
+
+    .system-details {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+}
